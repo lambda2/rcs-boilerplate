@@ -1,0 +1,266 @@
+// Les elements qui sont masques, et affiches lors du hover
+@mixin hoverable($parent: ".item") {
+  #{$parent}-hoverable {
+    opacity: 0;
+
+    @media (max-width: $screen-xs-max) {
+        opacity: 1;
+    }
+  }
+  #{$parent}:hover {
+    #{$parent}-hoverable {
+      opacity: 1;
+    }
+  }
+}
+
+// Les elements qui sont light, et normaux lors du hover
+@mixin lighteable($parent: ".item", $base: 0.5) {
+  #{$parent}-lighteable {
+    @media (max-width: $screen-xs-max) {
+        opacity: 1;
+    }
+  }
+  #{$parent}:hover {
+    #{$parent}-lighteable {
+      opacity: 1;
+    }
+  }
+}
+
+/* Flexbox display with vendor fallbacks */
+@mixin flexize($direction: "column", $justify: "space-between", $align: "stretch") {
+  @include display(flex);
+  @include align-items(#{$align});
+  @include flex-direction(#{$direction});
+  @include justify-content(#{$justify});
+}
+
+@mixin fall-to-column($width: $screen-xs-max) {
+  @media (max-width: $width) {
+    @include flex-direction(column);
+  }
+}
+
+/* Set an unicode content */
+@mixin iconize($code, $family: "streamline-30px") {
+  font-family: #{$family};
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  content: "#{$code}";
+}
+
+/* Set an unicode content */
+@mixin flex-item($grow, $shrink, $basis) {
+  @include flex-grow($grow);
+  @include flex-shrink($shrink);
+  @include flex-basis($basis);
+}
+
+/* Set an unicode content on ::before element */
+@mixin iconize-before($code, $family: "streamline-30px") {
+  &:before {
+    @include iconize($code, $family);
+  }
+}
+
+/* Set an unicode content on ::after element */
+@mixin iconize-after($code, $family: "streamline-30px") {
+  &:after {
+    @include iconize($code, $family);
+  }
+}
+
+@mixin stripize($backColor: "transparent", $fore: "#ccc") {
+  background: repeating-linear-gradient(-45deg, $backColor, $backColor 25%, shade($backColor, 10%) 25%, shade($backColor, 10%) 50%, $backColor 50%) top left fixed;
+}
+
+@mixin separate($sep-color: "#ccc", $separator: "-") {
+  margin-right: 5px;
+  &:not(:first-child):before {
+    content: $separator;
+    margin: 0 2px;
+    color: $sep-color;
+  }
+}
+
+@mixin page-content-fixed($gutter: $grid-gutter-width, $automargin: false) {
+  @if $automargin {
+    margin-right: auto;
+    margin-left: auto;
+  }
+  @else {
+    margin-right: $gutter / 2;
+    margin-left: $gutter / 2;
+  }
+  padding-left: $gutter / 2;
+  padding-right: $gutter / 2;
+  @include clearfix;
+}
+
+@mixin max-height() {
+  body,
+  html {
+    height: 100%;
+  }
+}
+
+/* Remove links transforms */
+@mixin undecorate() {
+  &:hover,
+  &:active,
+  &:focus
+  {
+    text-decoration: none;
+  }
+}
+
+/* For better background-images */
+@mixin full-background($url: false) {
+  background-position: 50% 50%;
+  background-size: 100% auto;
+  background-repeat: no-repeat;
+  @if $url {
+    background-image: asset_url($url);
+  }
+}
+
+/* Auto color generation variables set */
+
+$angle: 360 / 26;
+$strings: ('a' 'b' 'c' 'd' 'e' 'f' 'g' 'h' 'i' 'j' 'k' 'l' 'm' 'n' 'o' 'p' 'q' 'r' 's' 't' 'u' 'v' 'w' 'x' 'y' 'z');
+
+@function number($string) {
+  $char: str_slice($string, 0, 1);
+  $numbers:  1   2   3   4   5   6   7   8   9   10  11  12  13  14  15  16  17  18  19  20  21  22  23  24  25  26;
+  $match: zip($strings, $numbers);
+  @return map-get($match, $char);
+}
+
+/* Auto color generation mixin, for data-attr[a-z] */
+@mixin generate-colors($attribute)
+{
+  @for $i from 1 through 26 {
+    &[#{$attribute}^="#{nth($strings, $i)}"]
+    {
+      background-color: transparentize(adjust_hue($primary, floor($i * $angle)), .3);
+      & a:hover { background-color: transparentize(adjust_hue($primary, floor($i * $angle)), 0); }
+    }
+  }
+}
+
+/* RAINBOOOOWS ! */
+@mixin let-be-colors($foreground: $grey-light-dark, $background: transparent, $border: 0) {
+  color: $foreground;
+  background-color: $background;
+  @if ($border == 0) {
+    $border: $foreground;
+  }
+  border: 1px solid $foreground;
+}
+
+/* Generates better buttons */
+@mixin ft-button($color, $background, $border) {
+  color: $color;
+  background-color: $background;
+  border-color: $border;
+
+  &.invert {
+    color: $background;
+    background-color: $color;
+    border-color: $background;
+
+    & + .btn.invert {
+      margin-left: -1px;
+    }
+  }
+
+  &.on-active:not(.active) {
+    color: $background;
+    background-color: transparentize($background, .9);
+    border-color: transparentize($border, 1);
+  }
+
+  &.light-bg {
+    color: $background;
+    background-color: transparentize($background, .95);
+    border-color: transparent;
+
+    &:hover:not(.active) {
+      color: darken($background, 10%);
+      background-color: transparentize($background, .9);
+      border-color: transparentize($border, 1);
+    }
+  }
+
+  &:hover,
+  &:focus,
+  &.focus,
+  &:active,
+  &.active,
+  .open > &.dropdown-toggle {
+    color: $color;
+    background-color: darken($background, 10%);
+    border-color: darken($border, 10%);
+  }
+  &:active,
+  &.active,
+  .open > &.dropdown-toggle {
+    background-image: none;
+  }
+  &.disabled,
+  &[disabled],
+  fieldset[disabled] & {
+    &,
+    &:hover,
+    &:focus,
+    &.focus,
+    &:active,
+    &.active {
+      background-color: $background;
+      border-color: $border;
+    }
+  }
+
+  .badge {
+    color: $background;
+    background-color: $color;
+  }
+}
+
+.btn-group .btn.light-bg {
+  border-color: #cccccc;
+}
+
+// To make button lines (hamburger)
+@mixin line {
+  display: inline-block;
+  width: $button-size;
+  height: $button-size/7;
+  background: #666;
+  border-radius: $button-size/14;
+  transition: $transition;
+}
+
+
+// Responsive utilities
+
+@mixin respond-to($media) {
+  @if $media == mobile {
+    @media only screen and (max-width: $screen-sm) { @content; }
+  }
+  @else if $media == tablet {
+    @media only screen and (min-width: $screen-sm + 1px) and (max-width: $screen-md) { @content; }
+  }
+  @else if $media == desktop {
+    @media only screen and (min-width: $screen-md + 1px) and (max-width: $screen-lg) { @content; }
+  }
+  @else if $media == wide-desktop {
+    @media only screen and (min-width: $screen-lg) { @content; }
+  }
+}

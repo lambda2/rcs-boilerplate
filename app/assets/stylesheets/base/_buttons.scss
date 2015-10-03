@@ -1,0 +1,84 @@
+#{$all-button-inputs},
+.button,
+button {
+  @include appearance(none);
+  -webkit-font-smoothing: antialiased;
+  background-color: $action-color;
+  border-radius: $base-border-radius;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  font-family: $base-font-family;
+  font-size: $base-font-size;
+  font-weight: 600;
+  line-height: 1;
+  padding: 0.75em 1em;
+  text-decoration: none;
+  user-select: none;
+  vertical-align: middle;
+  white-space: nowrap;
+
+  &:hover,
+  &:focus {
+    background-color: darken($action-color, 15%);
+    color: #fff;
+    outline: none;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+
+}
+
+.button {
+
+  // Variants
+  &--block {
+    display: block;
+    text-align: center;
+  }
+
+  &--reverse {
+    background-color: transparent;
+    border: 1px solid $action-color;
+    color: $action-color;
+  }
+}
+
+#{$all-button-inputs}.rounded-button,
+.rounded-button {
+  @include appearance(none);
+  -webkit-font-smoothing: antialiased;
+  background-color: #fff;
+  border-radius: 20px;
+  border: none;
+  color: $dark-blue;
+  cursor: pointer;
+  display: inline-block;
+  font-family: $base-font-family;
+  font-size: $base-font-size;
+  font-weight: 600;
+  line-height: 1;
+  padding: 0.75em 1em;
+  text-decoration: none;
+  font-size: 1em;
+  user-select: none;
+  vertical-align: middle;
+  white-space: nowrap;
+  border: 1px solid $light-blue;
+
+  &:hover,
+  &:focus {
+    background-color: $action-color;
+    border-color: $action-color;
+    color: #fff;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+}

@@ -1,0 +1,45 @@
+
+= content_for(:page_class){"page--branding"}
+= content_for :navbar do
+  %span.home-branding
+%section.page-container
+  %button.md-trigger.rounded-button.main-signin-button{"data-modal" => "modal-signin"} Sign in
+  .home-container
+    %header
+      %h1.hero-brand-title We are
+      .hero-brand-image= image_tag("madcats_logo.svg", class: "main-logo-brand")
+      %h2
+        A community manager for the 21st Century.
+    %footer
+      .hero-request-beta
+        = form_tag newsletters_users_path, class: "input input--request", remote: true do
+          -# %form.input.input--request{action: newsletters_users_path, method: "POST"}
+          %input#input-request-beta.input__field.input__field--request{:type => "email", placeholder: "Leave us your email here", onkeyup:"this.setAttribute('value', this.value);", name: "newsletters_user[email]"}
+          %label.input__label.input__label--request{:for => "input-request-beta"}
+            %i.icon.material-icons.icon--request 
+            %span.input__label-content.input__label-content--request Request a beta invite
+          %button.submit-input--request{type: :submit}
+            %i.material-icons send
+%section.page-container.grey-background
+  .home-container
+    %article
+      .hero-item
+        %h3
+          We
+          %span.highlight manage
+          communities, provide
+          %span.highlight social intelligence
+          , and let community managers
+          %span.highlight focus on real communication
+          \.
+
+      -# .hero-item
+      -#   %h3
+      -#     We provide
+      -#     %span.highlight social intelligence
+
+      -# .hero-item
+      -#   %h3
+      -#     And let community managers
+      -#     %span.highlight focus on real communication
+  %footer

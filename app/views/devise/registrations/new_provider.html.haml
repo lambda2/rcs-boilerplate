@@ -1,0 +1,28 @@
+
+%section.page-container
+  .home-container
+    %header
+    .main-login-box.hero-request-beta
+      - resource = @user if @user
+
+      .user-profile-login
+        %h2 Just one more step to go
+        .image-rounded.profile-image{style: "background-image: url(#{resource.image_url});"}
+        .profile-name= @user.login
+
+      = simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: "input input--request"}) do |f|
+        = devise_error_messages!
+
+        %input#input-request-beta.input__field.input__field--request{:type => "email", placeholder: "Your email", onkeyup:"this.setAttribute('value', this.value);", name: "user[email]"}
+        %label.input__label.input__label--request{:for => "input-request-beta"}
+          %i.icon.material-icons.icon--request 
+          %span.input__label-content.input__label-content--request Enter your email
+        %button.submit-input--request{type: :submit}
+          %i.material-icons check
+
+        - if resource.uid and resource.provider
+          - p = Devise.friendly_token[0,20]
+          = f.input :password, as: :hidden, input_html: {value: p }
+          = f.input :password_confirmation, as: :hidden, input_html: {value: p }
+          - [:provider, :uid, :login, :image_url].each do |k|
+            = f.input k, as: :hidden, input_html: {value: resource.send(k) } unless resource.send(k).blank?

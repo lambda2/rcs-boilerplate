@@ -1,0 +1,18 @@
+%nav.main-navbar
+  .left-side
+  .center-side
+    = link_to root_path, class: "main-navbar-logo" do
+      %pre Logo
+
+  .right-side
+
+    -# - if user_signed_in?
+    -#   = link_to "#", class: "baselined" do
+    -#     - if current_user.image_url
+    -#       = image_tag current_user.image_url, class: "navbar-user-image"
+    -#     %span.navbar-item= display_name current_user
+    -#   = link_to destroy_user_session_path, :method => :delete, class: "baselined" do
+    -#     %i.material-icons input
+    -# - else
+    -#   %button.md-trigger.rounded-button.main-signin-button{"data-modal" => "modal-signin"} Sign in
+

@@ -1,0 +1,24 @@
+base: &base
+ adapter: postgresql
+ encoding: unicode
+ pool: 15
+ host: localhost
+ timeout: 5000
+ username: intra
+ password:
+
+development:
+ database: madcat_dev
+ <<: *base
+
+test: &test
+ database: madcat_test
+ <<: *base
+
+staging:
+ database: madcat_staging
+ <<: *base
+
+production:
+ database: madcat_prod
+ <<: *base

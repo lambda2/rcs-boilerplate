@@ -1,0 +1,24 @@
+{
+  "name": "%NAME_UNDERSCORE",
+  "version": "0.0.0",
+  "homepage": "https://github.com/lambda2/%NAME",
+  "authors": [
+    "Andre Aubin <andre.aubin@lambdaweb.fr>"
+  ],
+  "description": "%DESCRIPTION",
+  "moduleType": [
+    "amd",
+    "es6"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "moment": "~2.10.3"
+  }
+}

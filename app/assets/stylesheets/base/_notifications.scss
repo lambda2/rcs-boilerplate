@@ -1,0 +1,53 @@
+
+// Top banners
+.top-banner {
+  margin: 0;
+
+  &:not(:empty)
+  {
+    @include flexize("row", "center", "center");
+
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: -50px;
+    z-index: 20;
+    height: 50px;
+
+    padding: 10px;
+    background-color: $action-color;
+    color: #fff;
+
+    @include animation(show-notification 10s $ease-in-out-quad);
+    @include animation-delay(0s);
+
+    @include keyframes(show-notification) {
+      0% { @include transform(translateY(0px)); }
+      5% { @include transform(translateY(50px)); }
+      95% { @include transform(translateY(50px)); }
+      100% { @include transform(translateY(0px)); }
+    }
+
+
+    &.notice {
+
+    }
+
+    & + .primary-container,
+    & + .top-banner + .primary-container {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0px;
+      @include animation(show-notification 10s $ease-in-out-quad);
+      @include animation-delay(0s);
+
+      @include keyframes(show-notification) {
+        0% { @include transform(translateY(0px)); }
+        5% { @include transform(translateY(50px)); }
+        95% { @include transform(translateY(50px)); }
+        100% { @include transform(translateY(0px)); }
+      }
+    }
+  }
+}

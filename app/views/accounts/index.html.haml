@@ -1,0 +1,14 @@
+
+
+%h1.title Registered applications
+
+- if @accounts.any?
+  - @accounts.each do |account|
+
+    = link_to account_path(account) do
+      = react_component('accountItem', account.as_json, {prerender: true})
+
+  %h2= link_to "Register another account", new_account_path, class: "button button--block button--reverse"
+  
+- else
+  %h2= link_to "Register a new account now", new_account_path, class: "button button--block"
