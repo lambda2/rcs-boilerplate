@@ -4,21 +4,21 @@ base: &base
  pool: 15
  host: localhost
  timeout: 5000
- username: intra
+ username: deployer
  password:
 
 development:
- database: madcat_dev
+ database: %NAME_UNDERSCORE_dev
  <<: *base
 
 test: &test
- database: madcat_test
+ database: %NAME_UNDERSCORE_test
  <<: *base
 
 staging:
- database: madcat_staging
+ database: %NAME_UNDERSCORE_staging
  <<: *base
 
 production:
- database: madcat_prod
+ database: %NAME_UNDERSCORE_prod
  <<: *base
