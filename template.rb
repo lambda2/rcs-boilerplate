@@ -51,6 +51,7 @@ to_add = [
 
 to_delete = [
 "app/views/layouts/application.html.erb",
+"app/assets/stylesheets/application.css",
 "README.rdoc"
 ]
 
