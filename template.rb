@@ -12,6 +12,7 @@ dir_list = [
 
 to_add = [
 "app/assets/stylesheets/application.scss",
+"app/assets/javascripts/application.js",
 "app/assets/stylesheets/base/_base.scss",
 "app/assets/stylesheets/base/_buttons.scss",
 "app/assets/stylesheets/base/_fonts.scss",
